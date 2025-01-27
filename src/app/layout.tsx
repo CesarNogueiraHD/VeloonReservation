@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ItemMenu from "@/components/ItemMenu";
+import { FcCalendar, FcHome } from "react-icons/fc";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +28,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex`}
       >
-        {children}
+        <aside className="w-60 bg-[#9d07d1] text-white h-full fixed">
+          <ul>
+            <ItemMenu url={"/"} title="Início" icon={<FcHome size={26} />} />
+            <ItemMenu
+              url={"/reservations"}
+              title="Minhas reservas"
+              icon={<FcCalendar size={26} />}
+            />
+          </ul>
+        </aside>
+        <main className="ml-72 flex-1">{children}</main>
+        <ToastContainer />
       </body>
     </html>
   );
